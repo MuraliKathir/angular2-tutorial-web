@@ -1,0 +1,63 @@
+<div class="container">
+  <div  [hidden]="submitted">
+    <h1>Model Driven Form</h1>
+    <form [formGroup]="modelForm"  *ngIf="!submitted"  (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+          <label for="firstName"> FirstName </label>
+          <input type="text" class="form-control" formControlName="firstName">
+          <div [hidden]="modelForm.controls.firstName.valid" class="alert alert-danger"> FirstName is required </div>
+      </div>
+
+      <div class="form-group">
+          <label for="lastName"> lastName </label>
+          <input type="text" class="form-control" formControlName="lastName">
+          <div [hidden]="modelForm.controls.lastName.valid" class="alert alert-danger"> lastName is required </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="technology">Technologies</label>
+        <select class="form-control" id="technology" formControlName="technology">
+          <option *ngFor="let tech of technologies" [value]="tech">{{tech}}</option>
+        </select>
+        <div [hidden]="modelForm.controls.technology.valid || technology.pristine" class="alert alert-danger">
+          Technology is required
+        </div>
+      </div>
+
+     <div class="form-group">
+         <div class="checkbox-inline" *ngFor="let os of operatingSystems">
+             <div class="col-sm-4">
+                 <label><input type="checkbox" value="{{os}}">{{os}} </label>
+             </div>  
+         </div>
+     </div>
+
+      <button type="submit" class="btn btn-default" >Submit</button>
+    </form>
+  </div>
+  
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">First Name</div>
+      <div class="col-xs-9  pull-left">{{ modelForm.controls.firstName.value }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Last Name</div>
+      <div class="col-xs-9 pull-left">{{ modelForm.controls.lastName.value }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Technologies</div>
+      <div class="col-xs-9 pull-left">{{ modelForm.controls.technology.value }}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">Operating Systems</div>
+      <div class="col-xs-9 pull-left">{{ modelForm.controls.os.value }}</div>
+    </div>
+
+    <br>
+    <button class="btn btn-default" (click)="submitted=false">Edit</button>
+  </div>
+</div>

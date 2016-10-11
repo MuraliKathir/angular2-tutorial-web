@@ -1,0 +1,63 @@
+<div class="container">
+  <div  [hidden]="submitted">
+    <h1>Restration Form</h1>
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm">
+
+      <div class="form-group">
+          <label for="firstName"> FirstName </label>
+          <input type="text" class="form-control" name="firstName" required  [(ngModel)]="model.firstName" #firstName="ngModel">
+          <div [hidden]="firstName.valid" class="alert alert-danger"> FirstName is required </div>
+      </div>
+
+      <div class="form-group">
+          <label for="lastName"> lastName </label>
+          <input type="text" class="form-control" name="lastName" required  [(ngModel)]="model.lastName" #lastName="ngModel">
+          <div [hidden]="lastName.valid" class="alert alert-danger"> lastName is required </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="technology">Technologies</label>
+        <select class="form-control" id="technology" required [(ngModel)]="model.technology" name="technology" #technology="ngModel" >
+          <option *ngFor="let tech of technologies" [value]="tech">{{tech}}</option>
+        </select>
+        <div [hidden]="technology.valid || technology.pristine" class="alert alert-danger">
+          Technology is required
+        </div>
+      </div>
+
+     <div class="form-group">
+         <div class="checkbox-inline" *ngFor="let os of operatingSystems">
+             <div class="col-sm-4">
+                 <label><input type="checkbox" value="{{os}}">{{os}} </label>
+             </div>  
+         </div>
+     </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!heroForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="newHero()">New Hero</button>
+    </form>
+  </div>
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">First Name</div>
+      <div class="col-xs-9  pull-left">{{ model.firstName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Last Name</div>
+      <div class="col-xs-9 pull-left">{{ model.lastName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Technologies</div>
+      <div class="col-xs-9 pull-left">{{ model.technology }}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">Operating Systems</div>
+      <div class="col-xs-9 pull-left">{{ model.os }}</div>
+    </div>
+
+    <br>
+    <button class="btn btn-default" (click)="submitted=false">Edit</button>
+  </div>
+</div>

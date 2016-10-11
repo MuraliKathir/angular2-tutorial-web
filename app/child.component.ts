@@ -4,7 +4,7 @@ import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
     moduleId: module.id,
     selector: 'child',
     template: `<p> Welcome {{name}}, You have mentioned your age as {{age}}
-<button (click) = "sendToParent()"> Call Parent </button> </p>
+<button class="btn btn-default" (click) = "sendToParent()"> Call Parent </button> </p>
 <div class="well">
     <div class="row">
         <div class="col-xs-6">

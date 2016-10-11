@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
                 <li *ngFor = "let topic of topics">
                     <a href=# >{{topic}}</a>
                 </li>
-                <p *ngIf = "topics.length > 2"> There are many topics </p>
               `
 })
 export class GreetingComponent implements OnInit {

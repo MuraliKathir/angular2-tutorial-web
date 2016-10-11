@@ -5,12 +5,17 @@ import { ChildComponent } from './child.component';
     moduleId: module.id,
     selector: 'parent',
     template: `
-                <div class="well">
-                    <child [name] = "myName"  [age] = "myAge" (greet) = "getGreeting($event)"> </child>
-                    <button type="submit" class="btn btn-default" (click) = "getEmployeeDetails()" >Search</button>
+                <div class="container">
+                    <div class="well">
+                        <h3> Inter Component Communication. </h3>
+                        <child [name] = "myName"  [age] = "myAge" (greet) = "getGreeting($event)"> </child>
+                        <button type="submit" class="btn btn-default" (click) = "getEmployeeDetails()" >Search</button>
+                    </div>
+                    <div class="well">
+                        <div class="row"> {{greet}} </div>
+                        <div class="row"> <sibling [childMsg] = "greet"> </sibling> </div>
+                    </div>
                 </div>
-                {{greet}} <br>
-                <sibling [childMsg] = "greet"> </sibling>
                 
                 `
 
